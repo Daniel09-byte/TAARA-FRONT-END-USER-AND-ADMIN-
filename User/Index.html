@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>TAARA — Tabaco Animal Rescue and Adoption</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css" />
+<script defer src="assets/js/main.js"></script>
+  </head>
+  <body>
+    <!-- START: HOME PAGE -->
+    <header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="index.html">
+      <img src="https://images.unsplash.com/photo-1612536051532-4791208b9f21?w=80&q=80&auto=format&fit=crop" alt="TAARA Logo" class="brand-logo" />
+      <span>TAARA</span>
+    </a>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="adoption.html">Adoption</a>
+      <a href="rescue.html">Rescue</a>
+      <a href="donation.html">Donation</a>
+      <a href="events.html">Events</a>
+    </nav>
+    <button id="themeToggle" class="btn btn-outline small" aria-label="Toggle dark mode">🌓</button>
+  </div>
+</header>
+
+    <main>
+      <section class="hero reveal">
+        <img class="hero-img" src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?q=80&w=1600&auto=format&fit=crop" alt="Pets header image" />
+        <div class="hero-overlay">
+          <h1>Welcome to TAARA</h1>
+          <p>Tabaco Animal Rescue and Adoption — because every tail deserves a happy ending.</p>
+          <div class="hero-actions">
+            <a class="btn" href="#" onclick="fbLogin(); return false;">Log In with Facebook</a>
+            <a class="btn btn-outline" href="#" onclick="fbLogin(); return false;">Sign Up with Facebook</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="container section reveal">
+        <h2>Our Mission</h2>
+        <p>TAARA is a community-driven initiative dedicated to rescuing, rehabilitating, and rehoming animals in Tabaco City and nearby areas. We believe in compassionate rescue, responsible adoption, and education for humane treatment.</p>
+      </section>
+
+      <section class="container section grid two reveal">
+        <div>
+          <h2>About Us</h2>
+          <p>Founded in 2021, TAARA began as a small volunteer group responding to calls about animals in distress. Over time, our network of rescuers, fosters, and adopters grew into a reliable support system for animals in need.</p>
+          <p>We coordinate emergency rescues, provide basic veterinary care, and match animals with loving homes. Our team also leads outreach efforts to promote spay/neuter, vaccination, and responsible pet care.</p>
+          <p>Through partnerships with local vets and donors, we continue to expand our impact — one rescue at a time.</p>
+        </div>
+        <div>
+          <video class="about-video" src="https://videos.pexels.com/video-files/856213/856213-hd_1280_720_25fps.mp4" autoplay muted loop playsinline></video>
+        </div>
+      </section>
+
+      <section class="container section reveal">
+        <h2>Events</h2>
+        <div class="events">
+          <article class="event">
+            <img src="https://images.unsplash.com/photo-1548191265-cc70d3d45ba1?q=80&w=800&auto=format&fit=crop" alt="Adoption drive" />
+            <div>
+              <h3>Weekend Adoption Drive</h3>
+              <p class="event-meta">August 24, 2025</p>
+              <p>Meet adoptable cats and dogs, talk to our volunteers, and find your new best friend.</p>
+            </div>
+          </article>
+          <article class="event">
+            <img src="https://images.unsplash.com/photo-1525253013412-55c1a69a5738?q=80&w=800&auto=format&fit=crop" alt="Spay and neuter clinic" />
+            <div>
+              <h3>Spay & Neuter Clinic</h3>
+              <p class="event-meta">September 7, 2025</p>
+              <p>Low-cost services in partnership with local vets. Pre-registration required.</p>
+            </div>
+          </article>
+          <article class="event">
+            <img src="https://images.unsplash.com/photo-1494256997604-768d1f608cac?q=80&w=800&auto=format&fit=crop" alt="Volunteer training" />
+            <div>
+              <h3>Volunteer Orientation</h3>
+              <p class="event-meta">October 12, 2025</p>
+              <p>Learn how you can help — from rescue logistics to fosters and fundraising.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+  <div class="container footer-inner">
+    <p>© <span id="year"></span> TAARA — Tabaco Animal Rescue and Adoption. All rights reserved.</p>
+    <div class="footer-links">
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+      <a href="#">Contact</a>
+    </div>
+  </div>
+</footer>
+    <!-- END: HOME PAGE -->
+  
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+        <script>
+          window.fbAsyncInit = function() {
+            FB.init({
+              appId      : 'YOUR_APP_ID', // Replace with your Facebook App ID
+              cookie     : true,
+              xfbml      : true,
+              version    : 'v19.0'
+            });
+          };
+
+          function fbLogin() {
+            FB.login(function(response) {
+              if (response.authResponse) {
+                FB.api('/me', {fields: 'name,email'}, function(user) {
+                  alert('Welcome, ' + user.name + ' (Email: ' + user.email + ')');
+                });
+              } else {
+                alert('User cancelled login or did not fully authorize.');
+              }
+            }, {scope: 'email'});
+          }
+        </script>
+        </body>
+        
+</html>
