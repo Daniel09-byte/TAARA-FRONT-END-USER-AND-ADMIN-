@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>TAARA — Tabaco Animal Rescue and Adoption</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css" />
+<script defer src="assets/js/main.js"></script>
+  </head>
+  <body>
+    <!-- START: RESCUE PAGE -->
+    <header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="index.html">
+      <img src="https://images.unsplash.com/photo-1612536051532-4791208b9f21?w=80&q=80&auto=format&fit=crop" alt="TAARA Logo" class="brand-logo" />
+      <span>TAARA</span>
+    </a>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="adoption.html">Adoption</a>
+      <a href="rescue.html">Rescue</a>
+      <a href="donation.html">Donation</a>
+      <a href="events.html">Events</a>
+    </nav>
+    <button id="themeToggle" class="btn btn-outline small" aria-label="Toggle dark mode">🌓</button>
+  </div>
+</header>
+
+    <main class="container">
+      <section class="section">
+        <h1 class="reveal">Report a Rescue</h1>
+        <p class="lead reveal">If you found an animal that needs help, please fill out the form below. You can also use your current location.</p>
+      </section>
+
+      <section class="section grid two">
+        <form id="rescueForm" class="card reveal">
+          <h2>Rescue Request Form</h2>
+          <label>Full Name
+            <input type="text" name="name" placeholder="Your name" required />
+          </label>
+          <label>Contact Number
+            <input type="tel" name="contact" placeholder="09XXXXXXXXX" required />
+          </label>
+          <label>Pet Description / Situation
+            <textarea name="description" rows="4" placeholder="Tell us what happened..." required></textarea>
+          </label>
+          <label>Location
+            <input type="text" id="locationInput" name="location" placeholder="City/Barangay or coordinates" required />
+          </label>
+          <div class="btn-row">
+            <button type="button" class="btn btn-alt" id="useLocation">Use My Location</button>
+            <button type="submit" class="btn">Submit Request</button>
+          </div>
+          <p id="formMsg" class="muted"></p>
+        </form>
+
+        <div class="card reveal">
+          <h2>Map</h2>
+          <iframe id="mapFrame" class="map"
+            src="https://www.google.com/maps?q=Tabaco%20City&output=embed"
+            loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </section>
+
+      <section class="section card reveal">
+        <h2>Insert Picture/Video</h2>
+        <p class="muted">Upload a photo or video to help us assess the situation. (Optional)</p>
+        <input type="file" id="mediaInput" accept="image/*,video/*" />
+        <div id="mediaPreview" class="media-preview"></div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+  <div class="container footer-inner">
+    <p>© <span id="year"></span> TAARA — Tabaco Animal Rescue and Adoption. All rights reserved.</p>
+    <div class="footer-links">
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+      <a href="#">Contact</a>
+    </div>
+  </div>
+</footer>
+    <!-- END: RESCUE PAGE -->
+  </body>
+</html>
