@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TAARA • Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/admin.css" />
+  <!-- Chart.js for analytics -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand">TAARA</div>
+    <nav>
+      <button class="nav-link active" data-page="dashboard">Task</button>
+      <button class="nav-link" data-page="adoption">Adoption</button>
+      <button class="nav-link" data-page="rescue">Rescue</button>
+      <button class="nav-link" data-page="donation">Donation</button>
+      <button class="nav-link" data-page="events">Event</button>
+    </nav>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <h1>Administration</h1>
+      <div class="actions">
+        <button id="seedBtn" class="btn outline small">Seed demo data</button>
+        <button id="exportBtn" class="btn outline small">Export JSON</button>
+        <label class="import-btn">
+          <input id="importInput" type="file" accept="application/json" hidden />
+          <span class="btn outline small">Import JSON</span>
+        </label>
+        <div class="bell" title="Notifications">🔔</div>
+      </div>
+    </header>
+
+    <!-- DASHBOARD (Task) -->
+    <section class="page show" id="dashboard">
+      <div class="grid">
+        <div class="card">
+          <div class="card-title">On going due</div>
+          <ul id="dueList" class="list"></ul>
+        </div>
+
+        <div class="card">
+          <div class="card-title with-controls">
+            <span>Rescue Calendar</span>
+            <div>
+              <button id="prevMonth" class="chip">&lt;</button>
+              <button id="nextMonth" class="chip">&gt;</button>
+            </div>
+          </div>
+          <div id="calendar" class="calendar"></div>
+          <div class="legend">
+            <span class="badge info"></span> Rescue day
+            <span class="badge warn"></span> Due date
+            <span class="badge ok"></span> Event
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Event</div>
+          <form id="quickEventForm" class="row gap">
+            <input name="title" type="text" class="input" placeholder="New event title" required />
+            <input name="date" type="date" class="input" required />
+            <button class="btn">Post</button>
+          </form>
+          <ul id="eventMiniList" class="list compact"></ul>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Donation</div>
+          <div class="row gap">
+            <div class="col">
+              <h4>Recent donors</h4>
+              <ul id="recentDonors" class="list compact"></ul>
+            </div>
+            <div class="col">
+              <h4>Latest donations</h4>
+              <ul id="recentDonations" class="list compact"></ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Adoption</div>
+          <ul id="adoptionQueue" class="list"></ul>
+          <a class="link" data-page="adoption">Open adoption panel →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ADOPTION -->
+    <section class="page" id="adoption">
+      <div class="page-title">
+        <h2>Adoption Panel</h2>
+        <div class="row gap">
+          <button id="addAdoptionBtn" class="btn">New Application</button>
+          <div class="dropdown">
+            <select id="adoptionFilter" class="input">
+              <option value="all">All</option>
+              <option value="pending">Pending</option>
+              <option value="approved">Approved</option>
+              <option value="rejected">Rejected</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table class="table" id="adoptionTable">
+          <thead>
+            <tr>
+              <th>Applicant</th>
+              <th>Animal</th>
+              <th>Submitted</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- RESCUE -->
+    <section class="page" id="rescue">
+      <div class="page-title">
+        <h2>Rescue Analytics</h2>
+      </div>
+      <div class="grid analytics">
+        <div class="card">
+          <div class="card-title">Annually Graph for adoption</div>
+          <canvas id="adoptionYearChart" height="140"></canvas>
+        </div>
+        <div class="card">
+          <div class="card-title">Monthly Graph for adoption</div>
+          <canvas id="adoptionMonthChart" height="140"></canvas>
+        </div>
+        <div class="card">
+          <div class="card-title">Monitoring for Rescue</div>
+          <div class="table-wrap">
+            <table class="table" id="rescueTable">
+              <thead>
+                <tr>
+                  <th>Reporter</th>
+                  <th>Location</th>
+                  <th>Date</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Adoption Paper Evaluation</div>
+          <ul id="paperEvalList" class="list"></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- DONATION -->
+    <section class="page" id="donation">
+      <div class="page-title">
+        <h2>Donation Tracking</h2>
+        <div class="row gap">
+          <button id="addDonationBtn" class="btn">Add donation</button>
+          <button id="clearDonationsBtn" class="btn outline">Clear</button>
+        </div>
+      </div>
+      <div class="grid">
+        <div class="card">
+          <div class="card-title">Summary</div>
+          <div class="stats" id="donationStats"></div>
+        </div>
+        <div class="card">
+          <div class="card-title">Donations</div>
+          <div class="table-wrap">
+            <table class="table" id="donationTable">
+              <thead>
+                <tr>
+                  <th>Donor</th>
+                  <th>Amount</th>
+                  <th>Channel</th>
+                  <th>Date</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EVENTS -->
+    <section class="page" id="events">
+      <div class="page-title">
+        <h2>Events</h2>
+        <div class="row gap">
+          <button id="addEventBtn" class="btn">Create Event</button>
+        </div>
+      </div>
+      <div class="grid">
+        <div class="card">
+          <div class="card-title">Upcoming events</div>
+          <ul id="eventList" class="cards"></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- MODALS -->
+    <dialog id="modal">
+      <form method="dialog" class="modal">
+        <div class="modal-head">
+          <h3 id="modalTitle">Modal</h3>
+          <button class="chip" value="close">✕</button>
+        </div>
+        <div id="modalBody"></div>
+      </form>
+    </dialog>
+
+  </main>
+
+  <script src="assets/js/admin.js"></script>
+</body>
+</html>
